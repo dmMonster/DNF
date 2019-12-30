@@ -1,0 +1,1 @@
+//TODO wczytaj plik, wyświetl, losuj plik
