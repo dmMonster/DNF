@@ -17,13 +17,14 @@ class Dnf {
     r;
 
 
-    constructor() {
-        this.solve();
+    constructor(data) {
+        this.data = data;
     }
 
     solve() {
         this.positiveExamples();
 
+        let im = 0;
         while (this.positive.length > 0) {
             this.negativeExamples();//N
             this.r = ''; //r
@@ -32,35 +33,38 @@ class Dnf {
             let featuresToCheck = [];
 
             while (this.negative.length > 0) {
-                // alert("excluded: "+ excluded);
                 let f = this.selectF(excluded);
 
                 featuresToCheck.push(f);
-                this.r = this.r + " ∧ f" + (f+1);
-                //alert(this.r);
-
-                // alert(this.negative);
+                this.r = this.r + " ∧ f" + (f + 1);
 
                 for (let i = 0; i < this.negative.length; i++) {
-                    //alert(this.data[this.negative[i]][f]);
                     if (this.data[this.negative[i]][f] === 0) {
                         let removed = this.negative.splice(i, 1)[0];
                         excluded.push(removed);
                     }
                 }
-
-
-                //alert("Negative: " + this.negative);
-
+                if(im > 10000) {
+                    break;
+                }
+                im++;
+                console.log(im);
             }
+
             this.r = this.r.replace(" ∧", '');
             this.h = this.h + " V (" + this.r + ")";
 
             this.setCoverage(featuresToCheck);
+            console.log(this.data);
 
+            im++;
+            if(im > 10000) {
+                this.h = "Nie istnieje DNF. "
+                break;
+            }
         }
         this.h = this.h.replace(" V", '');
-        alert("koniec: " + this.h);
+        return this.h;
     }
 
     positiveExamples() {
@@ -69,7 +73,6 @@ class Dnf {
                 this.positive.push(i);
             }
         }
-        //alert(this.positive);
     }
 
     negativeExamples() {
@@ -83,9 +86,7 @@ class Dnf {
     selectF(excluded) {
         let features = [];
         for (let i = 0; i < this.data[0].length - 1; i++) {
-            //positive
-            //negative
-            //positive/negative
+
             let fTrue = 0;
             let fFalse = 0;
 
@@ -103,9 +104,9 @@ class Dnf {
 
 
             features.push(fTrue / Math.max(fFalse, 0.0001));
-            //alert(features);
+
         }
-        //alert(features.indexOf(Math.max(...features)));
+
         return features.indexOf(Math.max(...features));
     }
 
@@ -126,8 +127,5 @@ class Dnf {
                 this.positive.splice(this.positive.indexOf(i), 1);
             }
         }
-        console.log(this.data);
     }
 }
-
-let test = new Dnf();

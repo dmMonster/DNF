@@ -2,11 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="scripts/main.js" defer></script>
+    <title>DNF</title>
+    <script src="scripts/validator.js" defer></script>
     <script src="scripts/dnf.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+    <style>
+        #main {
+            margin: 10px 10px;
+            text-align: center;
+            min-height: 500px
+        }
+
+        .flex-container {
+            padding: 10px;
+            display: flex;
+            border: 1px solid bisque;
+            width: 80%;
+            margin: auto;
+            justify-content: space-around;
+            background: linear-gradient(rgba(255, 138, 0, .2), #fff);
+            box-shadow: 5px 10px #888888;
+            min-height: 500px;
+
+        }
+
+        .load-file-container {
+            border-right: 2px dotted darkcyan;
+        }
+
+        .btn {
+            color: #fff !important;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #0095f1;
+            padding: 20px;
+            border-radius: 5px;
+            display: inline-block;
+            border: none;
+            transition: all 0.4s ease 0s;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            background: #434343;
+            letter-spacing: 1px;
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.57);
+            transition: all 0.4s ease 0s;
+        }
+
+        .btn-large {
+            min-width: 200px;
+        }
+
+        #result-box {
+            padding: 2em;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        .btn-file {
+            border: 2px solid gray;
+            color: gray;
+            background-color: white;
+            padding: 0 10px 0 10px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .upload-btn-wrapper:hover {
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.57);
+            transition: all 0.4s ease 0s;
+        }
+
+        #file-status {
+            color: red;
+        }
+
+        #randomFile {
+            display: block;
+            text-align: left;
+        }
+
+        #randomFile input {
+            margin: 0.5em;
+        }
+    </style>
 </head>
 <body>
+<div id="main">
+    <header>
+        <h1>Algorytm DNF</h1>
+    </header>
+    <div class="flex-container">
+        <div class="load-file-container">
+            <h3>Wczytaj z pliku</h3>
+            <hr>
+            <span></span>
+            <br>
+
+
+            <div class="upload-btn-wrapper">
+                <button class="btn-file">Wybierz plik</button>
+                <input type="file" id="file"/>
+            </div>
+
+            <button class="btn" id="loadFile">Wczytaj</button>
+            <div id="file-status">Status: nie wczytano pliku</div>
+            <hr>
+            <h3>Generuj losowy plik</h3>
+            <div id="randomFile">
+                <label for="file-col">Ile kolumn? </label>
+                <input value="50" type="number" min="2" max="999" id="file-col">
+                <br>
+                <label for="file-row">Ile wierszy? </label>
+                <input value="80" type="number" min="2" max="999" id="file-row">
+                <br>
+                <button class="btn" id="btnRandomFile">Generuj</button>
+                <div id="fileLink"></div>
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-large" id="solveDnf">Rozwiąż</button>
+            <div id="result-box">
+                Wynik:
+            </div>
+        </div>
+    </div>
+    <footer>
+        <h5>Autor: Dariusz Maciaszek</h5>
+    </footer>
+</div>
 
 </body>
 </html>
