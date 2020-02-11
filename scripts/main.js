@@ -1,7 +1,4 @@
-//TODO losuj plik
 class EventHandler {
-    DNF;
-    Validator;
 
     constructor() {
 
@@ -18,10 +15,6 @@ class EventHandler {
                 this.solve();
             });
 
-            let randFileBtn = document.querySelector("#btnRandomFile");
-            randFileBtn.addEventListener("click", () => {
-                this.randomFile();
-            })
         })
     }
 
@@ -35,7 +28,7 @@ class EventHandler {
             });
 
             this.Validator = new Validator(result);
-            let validateData = this.Validator.validate()
+            let validateData = this.Validator.validate();
             if (validateData !== false) {
                 this.DNF = new Dnf(result);
                 document.querySelector("#file-status").innerText = "Wczytano plik."
@@ -59,7 +52,6 @@ class EventHandler {
     displayResult(result) {
         document.querySelector("#result-box").innerText = "Wynik" +result;
     }
-
 
 }
 

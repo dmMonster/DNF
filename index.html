@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>DNF</title>
@@ -94,14 +94,7 @@
             color: red;
         }
 
-        #randomFile {
-            display: block;
-            text-align: left;
-        }
 
-        #randomFile input {
-            margin: 0.5em;
-        }
     </style>
 </head>
 <body>
@@ -125,17 +118,6 @@
             <button class="btn" id="loadFile">Wczytaj</button>
             <div id="file-status">Status: nie wczytano pliku</div>
             <hr>
-            <h3>Generuj losowy plik</h3>
-            <div id="randomFile">
-                <label for="file-col">Ile kolumn? </label>
-                <input value="50" type="number" min="2" max="999" id="file-col">
-                <br>
-                <label for="file-row">Ile wierszy? </label>
-                <input value="80" type="number" min="2" max="999" id="file-row">
-                <br>
-                <button class="btn" id="btnRandomFile">Generuj</button>
-                <div id="fileLink"></div>
-            </div>
         </div>
 
         <div>

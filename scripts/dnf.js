@@ -1,6 +1,6 @@
 class Dnf {
-    //D
-    data = [
+    //D //example array
+   /* data = [
         [0, 1, 0, 1, 0],
         [0, 1, 1, 1, 1],
         [1, 1, 0, 0, 1],
@@ -10,15 +10,15 @@ class Dnf {
         [0, 0, 1, 1, 1]
     ];
 
-    //P
-    positive = [];
-    negative = [];
-    h = '';
-    r;
+    */
 
 
     constructor(data) {
         this.data = data;
+        this.positive = [];
+        this.negative = [];
+        this.r = '';
+        this.h = '';
     }
 
     solve() {
@@ -32,34 +32,42 @@ class Dnf {
             let excluded = [];
             let featuresToCheck = [];
 
+            let rCounter = 0;
             while (this.negative.length > 0) {
                 let f = this.selectF(excluded);
-
+				
+				
                 featuresToCheck.push(f);
-                this.r = this.r + " ∧ f" + (f + 1);
+                if (this.r.indexOf("f" + (f + 1)) === -1) {
+                    this.r = this.r + " ∧ f" + (f + 1);
+                }
 
-                for (let i = 0; i < this.negative.length; i++) {
-                    if (this.data[this.negative[i]][f] === 0) {
-                        let removed = this.negative.splice(i, 1)[0];
+
+                for (let i = 0; i < this.data.length; i++) {
+                    if (this.data[i][f] === 0 && this.negative.indexOf(i) !== -1) {
+						let indexToDelete = this.negative.indexOf(i);
+                        let removed = this.negative.splice(indexToDelete, 1)[0];
                         excluded.push(removed);
                     }
                 }
-                if(im > 10000) {
+                rCounter++;
+                if (im > 10000 || rCounter > this.data[0].length - 1 ) {
                     break;
                 }
                 im++;
-                console.log(im);
             }
 
             this.r = this.r.replace(" ∧", '');
             this.h = this.h + " V (" + this.r + ")";
 
-            this.setCoverage(featuresToCheck);
-            console.log(this.data);
+            let coverage = this.setCoverage(featuresToCheck);
 
             im++;
-            if(im > 10000) {
-                this.h = "Nie istnieje DNF. "
+            if(coverage === false) {
+                im += 10000;
+            }
+            if (im > 10000) {
+                this.h = " Porażka. Nie istnieje DNF.";
                 break;
             }
         }
@@ -124,8 +132,14 @@ class Dnf {
                 for (let j = 0; j < featuresToCheck.length; j++) {
                     this.data[i][featuresToCheck[j]] = 0;
                 }
-                this.positive.splice(this.positive.indexOf(i), 1);
+                let coverage = this.positive.splice(this.positive.indexOf(i), 1);
+                if(coverage.length === 0) {
+                    return false;
+                }
+
             }
         }
+
+        return true;
     }
 }

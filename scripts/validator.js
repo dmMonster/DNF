@@ -1,5 +1,4 @@
 class Validator {
-    data;
 
     constructor(data) {
         this.data = data;
@@ -18,7 +17,7 @@ class Validator {
         }
 
         let string = JSON.stringify(this.data);
-        let pattern = /^(\[\[){1}("0",|"1",|"0"],|"1"],|\["0",|\["1",|"1"|"0"){1,}\]\]$/;
+        let pattern = /^(\[\[){1}("0",|"1",|"0"],|"1"],|\["0",|\["1",|"1"|"0"){1,}\]]$/;
 
         if (!pattern.test(string)) {
             alert("Zły format. Dozwolone wyłącznie znaki: spacja, 0 ,1 i przejscie do nowej linii");
