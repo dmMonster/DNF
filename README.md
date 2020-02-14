@@ -1,7 +1,7 @@
 # DNF
-DNF algorithm w języku javaScript
+DNF algorytm w języku javaScript
 
-- algorytm (DNF):
+### algorytm (DNF):
 - D = zbiór danych
 - P = przykłady pozytywne w D
 - h = false
