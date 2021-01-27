@@ -1,5 +1,5 @@
 # DNF
-DNF algorytm w języku javaScript
+DNF algorytm w języku JavaScript
 
 ### algorytm (DNF):
 - D = zbiór danych
